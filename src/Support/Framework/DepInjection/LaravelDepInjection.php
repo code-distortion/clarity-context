@@ -10,6 +10,10 @@ use Illuminate\Contracts\Foundation\Application;
  */
 class LaravelDepInjection implements FrameworkDepInjectionInterface
 {
+//    private static array $cache = [];
+
+
+
     /**
      * Get a value (or class instance) using the dependency container.
      *
@@ -19,6 +23,15 @@ class LaravelDepInjection implements FrameworkDepInjectionInterface
      */
     public static function get(string $key, mixed $default = null): mixed
     {
+//        if (isset(self::$cache[$key])) {
+//            return self::$cache[$key];
+//        }
+//        return is_callable($default)
+//            ? $default()
+//            : $default;
+
+
+
         /** @var Application $app */
         $app = app();
 
@@ -43,6 +56,15 @@ class LaravelDepInjection implements FrameworkDepInjectionInterface
      */
     public static function getOrSet(string $key, mixed $default): mixed
     {
+//        if (!isset(self::$cache[$key])) {
+//            self::$cache[$key] = is_callable($default)
+//                ? $default()
+//                : $default;
+//        }
+//        return self::$cache[$key];
+
+
+
         /** @var Application $app */
         $app = app();
 
@@ -75,6 +97,11 @@ class LaravelDepInjection implements FrameworkDepInjectionInterface
      */
     public static function set(string $key, mixed $value): void
     {
+//        self::$cache[$key] = $value;
+//        return;
+
+
+
         /** @var Application $app */
         $app = app();
 
@@ -108,6 +135,10 @@ class LaravelDepInjection implements FrameworkDepInjectionInterface
      */
     public static function call(callable $callable, array $parameters = []): mixed
     {
+//        return call_user_func_array($callable, $parameters);
+
+
+
         /** @var Application $app */
         $app = app();
         return $app->call($callable, $parameters);

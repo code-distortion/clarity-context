@@ -12,6 +12,8 @@ use CodeDistortion\ClarityContext\Support\CallStack\MetaData\LastApplicationFram
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SimulateControlPackage;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -40,6 +42,8 @@ class CallStackMetaGroupUnitTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
+    #[DataProvider('buildMetaGroupsDataProvider')]
     public static function test_the_building_of_meta_groups(
         callable $callable,
         array $expected,

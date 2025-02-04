@@ -6,6 +6,8 @@ use CodeDistortion\ClarityContext\Support\CallStack\Frame;
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ExceptionThrownMeta;
 use CodeDistortion\ClarityContext\Support\CallStack\MetaGroup;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use stdClass;
 
 /**
@@ -28,6 +30,8 @@ class MetaGroupUnitTest extends PHPUnitTestCase
      * @param boolean $exceptionCaughtInThisFrame Whether $exceptionCaughtInThisFrame will be set to true or false.
      * @return void
      */
+    #[Test]
+    #[DataProvider('metaGroupCrudDataProvider')]
     public static function test_meta_group_crud(
         bool $isInApplicationFrame,
         bool $isInLastApplicationFrame,

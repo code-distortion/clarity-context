@@ -4,6 +4,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\Support\CallStack\MetaData;
 
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\CallMeta;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the CallMeta class.
@@ -19,6 +20,7 @@ class CallMetaUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_call_meta(): void
     {
         $rand = mt_rand();

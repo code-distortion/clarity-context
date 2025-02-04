@@ -6,6 +6,7 @@ use CodeDistortion\ClarityContext\Support\Framework\Framework;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\ValueObject;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Laravel framework dependency injection integration.
@@ -21,6 +22,7 @@ class LaravelFrameworkDepInjUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_framework_dep_inj_caching(): void
     {
         self::assertSame(Framework::depInj(), Framework::depInj());
@@ -35,6 +37,7 @@ class LaravelFrameworkDepInjUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_framework_dep_inj(): void
     {
         $depInjection = Framework::depInj();

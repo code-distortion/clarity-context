@@ -9,6 +9,7 @@ use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\PHPStackTraceHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SomeOtherClass;
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the MetaCallStack class.
@@ -26,6 +27,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_storage_of_meta_data_x_steps_back(): void
     {
         // start empty
@@ -67,6 +69,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_storage_of_different_sorts_of_meta_data(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -93,6 +96,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_replacement_of_a_meta_datas_value(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -168,6 +172,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_pruning_when_adding_meta_data(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -244,6 +249,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_pruning_based_on_a_stack_trace(): void
     {
         // add some meta-data in this frame
@@ -288,6 +294,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_pruning_based_on_an_exception(): void
     {
         // build a new MetaCallStack instance - also add some initial meta-data in the previous frame
@@ -445,6 +452,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_meta_data_pruning_when_calling_the_same_closure_on_the_same_line(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -498,6 +506,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_meta_data_pruning_when_calling_different_closures_on_the_same_line(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -522,11 +531,39 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
         $metaData = $metaCallStack->getStackMetaData();
         $lastIndex = max(array_keys($metaData));
 
-        self::assertSame(2, count($metaData[$lastIndex]));
-        self::assertSame('typeA', $metaData[$lastIndex][0]['type']);
-        self::assertSame('valueA', $metaData[$lastIndex][0]['value']);
-        self::assertSame('typeB', $metaData[$lastIndex][1]['type']);
-        self::assertSame('valueB', $metaData[$lastIndex][1]['value']);
+        // PHP 8.4+
+        // From PHP 8.4, the closure's frame includes extra information in the "function" key which lets Clarity Context
+        // tell the difference between the two closures!
+        //
+        // 12 => array:5 [
+        //   "file" => "/var/www/html/code-distortion/clarity-context/tests/Unit/Support/MetaCallStackUnitTest.php"
+        //   "line" => 518
+        //   "function" => "{closure:CodeDistortion\ClarityContext\Tests\Unit\Support\MetaCallStackUnitTest::test_meta_data_pruning_when_calling_different_closures_on_the_same_line():517}"
+        //   "class" => "CodeDistortion\ClarityContext\Tests\Unit\Support\MetaCallStackUnitTest"
+        //   "type" => "::"
+        // ]
+        if (version_compare(PHP_VERSION, '8.4', '>=')) {
+            self::assertSame(1, count($metaData[$lastIndex]));
+            self::assertSame('typeB', $metaData[$lastIndex][0]['type']);
+            self::assertSame('valueB', $metaData[$lastIndex][0]['value']);
+        // < PHP 8.4
+        // Before PHP 8.4, the closure's frame contained generic inforrmation in the "function" key making it impossible
+        // for Clarity Context to tell the difference between the two closures
+        //
+        // 12 => array:5 [
+        //   "file" => "/var/www/html/code-distortion/clarity-context/tests/Unit/Support/MetaCallStackUnitTest.php"
+        //   "line" => 523
+        //   "function" => "CodeDistortion\ClarityContext\Tests\Unit\Support\{closure}"
+        //   "class" => "CodeDistortion\ClarityContext\Tests\Unit\Support\MetaCallStackUnitTest"
+        //   "type" => "::"
+        // ]
+        } else {
+            self::assertSame(2, count($metaData[$lastIndex]));
+            self::assertSame('typeA', $metaData[$lastIndex][0]['type']);
+            self::assertSame('valueA', $metaData[$lastIndex][0]['value']);
+            self::assertSame('typeB', $metaData[$lastIndex][1]['type']);
+            self::assertSame('valueB', $metaData[$lastIndex][1]['value']);
+        }
 
 
 
@@ -557,6 +594,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_meta_data_pruning_when_calling_the_same_static_method_on_the_same_line(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -600,6 +638,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_meta_data_pruning_when_calling_different_static_methods_on_the_same_line(): void
     {
         $metaCallStack = new MetaCallStack();
@@ -670,6 +709,7 @@ class MetaCallStackUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_addition_of_multiple_meta_data_from_the_same_call(): void
     {
         // add some meta-data to start with

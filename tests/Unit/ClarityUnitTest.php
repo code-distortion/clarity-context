@@ -12,6 +12,8 @@ use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Clarity class.
@@ -32,6 +34,8 @@ class ClarityUnitTest extends LaravelTestCase
      * @param array<string[]|string> $expected The expected meta-data values.
      * @return void
      */
+    #[Test]
+    #[DataProvider('metaDataCombinationDataProvider')]
     public static function test_the_addition_of_meta_data(
         string|array $arg1,
         string|array|null $arg2,
@@ -68,15 +72,19 @@ class ClarityUnitTest extends LaravelTestCase
      * @test
      * @dataProvider metaDataCombinationDataProvider
      *
-     * @param string|string[]      $arg1 The first argument to pass.
-     * @param string|string[]|null $arg2 The second argument to pass (when not null).
-     * @param string|string[]|null $arg3 The third argument to pass (when not null).
+     * @param string|string[]        $arg1     The first argument to pass.
+     * @param string|string[]|null   $arg2     The second argument to pass (when not null).
+     * @param string|string[]|null   $arg3     The third argument to pass (when not null).
+     * @param array<string[]|string> $expected The expected meta-data values.
      * @return void
      */
+    #[Test]
+    #[DataProvider('metaDataCombinationDataProvider')]
     public static function test_the_addition_of_meta_data_when_disabled(
         string|array $arg1,
         string|array|null $arg2,
         string|array|null $arg3,
+        array $expected,
     ): void {
 
         LaravelConfigHelper::disableClarity();
@@ -168,6 +176,7 @@ class ClarityUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_build_context_here_method(): void
     {
         $frameCount = count(debug_backtrace()) + 1;
@@ -236,6 +245,7 @@ class ClarityUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_retrieval_of_exception_context_objects(): void
     {
         // no "latest" Context yet
@@ -271,6 +281,7 @@ class ClarityUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_addition_of_trace_identifiers(): void
     {
         // no identifiers yet

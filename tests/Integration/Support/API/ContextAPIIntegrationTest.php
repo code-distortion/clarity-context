@@ -9,6 +9,7 @@ use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\PHPStackTraceHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SimulateControlPackage;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the ContextAPI class.
@@ -25,6 +26,7 @@ class ContextAPIIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_build_context_method_for_php_stack_trace_and_check_output_context_object(): void
     {
         // add some config settings to make sure they're picked up later
@@ -73,6 +75,7 @@ class ContextAPIIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_build_context_method_for_an_exception_and_check_output_context_object(): void
     {
         // add some config settings to make sure they're picked up later

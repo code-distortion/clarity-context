@@ -9,6 +9,7 @@ use CodeDistortion\ClarityContext\Support\InternalSettings;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the MetaCallStackAPI class.
@@ -24,6 +25,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_push_meta_data_method_when_clarity_is_disabled(): void
     {
         LaravelConfigHelper::disableClarity();
@@ -42,6 +44,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+     #[Test]
     public static function test_push_meta_data_method(): void
     {
         // add some meta-data
@@ -91,6 +94,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_push_meta_data_method_with_invalid_frames_back(): void
     {
         // test going back too many frames
@@ -116,6 +120,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_push_multiple_meta_data_method_when_clarity_is_disabled(): void
     {
         LaravelConfigHelper::disableClarity();
@@ -134,6 +139,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_push_multiple_meta_data_method(): void
     {
         // add some meta-data
@@ -182,6 +188,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_push_multiple_meta_data_method_with_invalid_frames_back(): void
     {
         // test going back too many frames
@@ -206,6 +213,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_replace_meta_data_method_when_clarity_is_disabled(): void
     {
         // add some meta-data + try to replace, even though Clarity has been disabled
@@ -228,6 +236,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_replace_meta_data_method(): void
     {
         $summariseMetaData = function () {
@@ -353,6 +362,7 @@ class MetaCallStackAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_that_control_run_meta_is_removed_from_top(): void
     {
         MetaCallStackAPI::pushMultipleMetaData(InternalSettings::META_DATA_TYPE__CONTROL_CALL, null, ['call-one']);

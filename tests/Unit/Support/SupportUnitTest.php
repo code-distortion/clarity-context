@@ -9,6 +9,8 @@ use CodeDistortion\ClarityContext\Support\CallStack\MetaData\LastApplicationFram
 use CodeDistortion\ClarityContext\Support\MetaCallStack;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Support class.
@@ -28,6 +30,8 @@ class SupportUnitTest extends PHPUnitTestCase
      * @param mixed[]        $expected The expected output.
      * @return void
      */
+    #[Test]
+    #[DataProvider('argumentDataProvider')]
     public static function test_normalise_args_method(array $previous, array $args, array $expected): void
     {
         $normalised = Support::normaliseArgs($previous, $args);
@@ -128,6 +132,8 @@ class SupportUnitTest extends PHPUnitTestCase
      * @param string $projectRootDir The project root dir.
      * @return void
      */
+    #[Test]
+    #[DataProvider('resolveProjectFileDataProvider')]
     public static function test_resolve_project_file_method(
         string $expected,
         string $file,
@@ -229,6 +235,8 @@ class SupportUnitTest extends PHPUnitTestCase
      * @param string  $projectRootDir The project root dir.
      * @return void
      */
+    #[Test]
+    #[DataProvider('resolveIsApplicationFileCheckDataProvider')]
     public static function test_is_application_file_check_method(
         bool $expected,
         string $projectFile,
@@ -299,6 +307,8 @@ class SupportUnitTest extends PHPUnitTestCase
      * @param boolean               $expected       The expected outcome.
      * @return void
      */
+    #[Test]
+    #[DataProvider('metaTypeCountDataProvider')]
     public static function test_decide_if_meta_counts_are_worth_listing_method(
         array $metaTypeCounts,
         bool $expected
@@ -338,6 +348,7 @@ class SupportUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_get_global_meta_call_stack_method(): void
     {
         $metaCallStack1 = Support::getGlobalMetaCallStack();
@@ -356,6 +367,7 @@ class SupportUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_step_back_stack_trace_method(): void
     {
         $phpStackTrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -407,6 +419,7 @@ class SupportUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_prepare_stack_trace_method(): void
     {
         $phpStackTrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -492,6 +505,8 @@ class SupportUnitTest extends PHPUnitTestCase
      * @param integer $addFrames       The number of frames to add.
      * @return void
      */
+    #[Test]
+    #[DataProvider('exceptionHandlerFramesDataProvider')]
     public static function test_that_laravel_exception_handler_frames_are_pruned(int $startFrameCount, int $addFrames)
     {
         $phpStackTrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);

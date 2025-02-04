@@ -6,6 +6,7 @@ use CodeDistortion\ClarityContext\Support\CallStack\CallStack;
 use CodeDistortion\ClarityContext\Support\CallStack\Frame;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test CallStack's methods that search for different types of frames.
@@ -21,6 +22,7 @@ class CallStackFramesUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_accessing_the_last_application_frame(): void
     {
         $frame1 = self::buildCallStackFrame('/var/www/html/src/some-file1', '/var/www/html', false);
@@ -68,6 +70,7 @@ class CallStackFramesUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_accessing_the_thrown_here_frame(): void
     {
         $frame1 = self::buildCallStackFrame('/var/www/html/src/some-file1', '/var/www/html', false, false);
@@ -115,6 +118,7 @@ class CallStackFramesUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_accessing_the_caught_here_frame(): void
     {
         $frame1 = self::buildCallStackFrame('/var/www/html/src/some-file1', '/var/www/html', false, false, false);

@@ -18,6 +18,7 @@ use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SimulateControlPackage;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -35,6 +36,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_the_retrieval_of_meta_objects(): void
     {
         Clarity::context('ONE');
@@ -84,6 +86,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_callstack_frames_and_meta_objects_when_built_for_a_thrown_exception(): void
     {
         Clarity::context('hello');
@@ -159,6 +162,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_callstack_frames_and_meta_objects_when_built_from_passed_exception(): void
     {
         Clarity::context('hello');
@@ -194,6 +198,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_callstack_frames_and_meta_objects_when_not_built_from_an_exception(): void
     {
         Clarity::context('hello');
@@ -230,6 +235,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_what_happens_when_the_project_root_cant_be_resolved(): void
     {
         $e = null;
@@ -277,6 +283,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_that_meta_matches_the_frames(): void
     {
         // simulate Control running and catching an exception
@@ -313,6 +320,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_exception_thrown_meta(): void
     {
         $callback = function (Context $context, Exception $e) {
@@ -382,6 +390,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_exception_caught_meta(): void
     {
         $callback = function (Context $context) {
@@ -453,6 +462,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_last_application_frame_meta(): void
     {
         $callback = function (Context $context, Exception $e) {
@@ -544,6 +554,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_that_the_callstack_file_and_line_numbers_are_shifted_by_1(): void
     {
         $closure = function () {
@@ -565,15 +576,21 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
                 $frame->getFunction()
             );
             self::assertSame(__FILE__, $frame->getFile());
-            self::assertSame(__LINE__ + 11, $frame->getLine());
+            self::assertSame(__LINE__ + 17, $frame->getLine());
+
+            // PHP 8.4+ includes extra information in the frame's "function" key
+            $compare = version_compare(PHP_VERSION, '8.4', '>=')
+                ? '{closure:CodeDistortion\ClarityContext\Tests\Integration\Support\Context\CallStack\CallStackAndFrame'
+                  . 'GenerationIntegrationTest::test_that_the_callstack_file_and_line_numbers_are_shifted_by_1():560}'
+                : 'CodeDistortion\ClarityContext\Tests\Integration\Support\Context\CallStack\{closure}';
 
             $frame = $frames[1];
             self::assertSame(
-                'CodeDistortion\ClarityContext\Tests\Integration\Support\Context\CallStack\{closure}',
+                $compare,
                 $frame->getFunction()
             );
             self::assertSame(__FILE__, $frame->getFile());
-            self::assertSame(__LINE__ - 25, $frame->getLine());
+            self::assertSame(__LINE__ - 31, $frame->getLine());
         };
 
         $closure();
@@ -588,6 +605,7 @@ class CallStackAndFrameGenerationIntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_that_the_last_frame_is_marked_so(): void
     {
         // simulate Control running and catching an exception

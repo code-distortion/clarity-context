@@ -11,6 +11,8 @@ use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\PHPStackTraceHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SimulateControlPackage;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the ContextAPI class.
@@ -26,6 +28,7 @@ class ContextAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_build_context_here_method_has_correct_values(): void
     {
         LaravelConfigHelper::updateChannelsWhenKnown(['channel-when-known']);
@@ -55,6 +58,8 @@ class ContextAPIUnitTest extends LaravelTestCase
      * @param boolean $expectException Whether an exception is expected or not.
      * @return void
      */
+    #[Test]
+    #[DataProvider('phpStackTraceDataProvider')]
     public static function test_build_context_here_method_builds_based_on_frames_back(
         int $framesBack,
         bool $expectException
@@ -104,6 +109,8 @@ class ContextAPIUnitTest extends LaravelTestCase
      * @param boolean      $catch   Whether to pretend to catch the exception or not.
      * @return void
      */
+    #[Test]
+    #[DataProvider(methodName: 'buildContextFromExceptionDataProvider')]
     public static function test_build_context_from_exception_method(?bool $report, bool $isKnown, bool $catch): void
     {
         LaravelConfigHelper::updateReportSetting($report);
@@ -185,6 +192,7 @@ class ContextAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_context_remember_retrieve_and_forget_methods(): void
     {
         self::assertNull(ContextAPI::getLatestExceptionContext());

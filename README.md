@@ -1,9 +1,9 @@
 # Clarity Context - Understand Your Exceptions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/code-distortion/clarity-context.svg?style=flat-square)](https://packagist.org/packages/code-distortion/clarity-context)
-![PHP Version](https://img.shields.io/badge/PHP-8.0%20to%208.3-blue?style=flat-square)
-![Laravel](https://img.shields.io/badge/laravel-8%20to%2010-blue?style=flat-square)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/code-distortion/clarity-context/run-tests.yml?branch=master&style=flat-square)](https://github.com/code-distortion/clarity-context/actions)
+![PHP Version](https://img.shields.io/badge/PHP-8.0%20to%208.4-blue?style=flat-square)
+![Laravel](https://img.shields.io/badge/laravel-8%20to%2011-blue?style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/code-distortion/clarity-context/run-tests.yml?branch=main&style=flat-square)](https://github.com/code-distortion/clarity-context/actions)
 [![Buy The World a Tree](https://img.shields.io/badge/treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/code-distortion/clarity-context)
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.1%20adopted-ff69b4.svg?style=flat-square)](.github/CODE_OF_CONDUCT.md)
 
@@ -302,7 +302,7 @@ You can retrieve the following details from the Meta objects:
 
 ``` php
 // all Meta classes
-$meta->getFile();        // the relevant file 
+$meta->getFile();        // the relevant file
 $meta->getProjectFile(); // the same file, but relative to the project-root's dir
 $meta->getLine();        // the relevant line number
 $meta->getFunction();    // the function or method being run at the time
@@ -346,7 +346,7 @@ $context->getCallStack()->getMetaGroups();
 Each MetaGroup contains similar details to the `Frame` object.
 
 ``` php
-$metaGroup->getFile();                    // the path to the file containing the code being run 
+$metaGroup->getFile();                    // the path to the file containing the code being run
 $metaGroup->getProjectFile();             // the same file, but relative to the project-root's dir
 $metaGroup->getLine();                    // the relevant line number
 $metaGroup->getFunction();                // the function or method being run at the time

@@ -5,6 +5,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\API;
 use CodeDistortion\ClarityContext\API\DataAPI;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the DataAPI class.
@@ -22,6 +23,7 @@ class DataAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_storage_and_retrieval_of_trace_identifiers_when_disabled(): void
     {
         LaravelConfigHelper::disableClarity();
@@ -38,6 +40,7 @@ class DataAPIUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_storage_and_retrieval_of_trace_identifiers(): void
     {
         // no identifiers yet

@@ -4,6 +4,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\Support\CallStack\MetaData;
 
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ExceptionThrownMeta;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the ExceptionThrownMeta class.
@@ -19,6 +20,7 @@ class ExceptionThrownMetaUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_exception_thrown_meta(): void
     {
         $rand = mt_rand();

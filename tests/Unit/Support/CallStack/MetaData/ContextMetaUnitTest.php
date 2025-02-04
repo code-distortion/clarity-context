@@ -4,6 +4,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\Support\CallStack\MetaData;
 
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ContextMeta;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the ContextMeta class.
@@ -19,6 +20,7 @@ class ContextMetaUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_context_meta(): void
     {
         $rand = mt_rand();

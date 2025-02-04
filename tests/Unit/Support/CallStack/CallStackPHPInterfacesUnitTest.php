@@ -8,6 +8,7 @@ use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test CallStack's implementation of PHP's ArrayAccess, Countable and SeekableIterator Interfaces.
@@ -23,6 +24,7 @@ class CallStackPHPInterfacesUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_call_stack(): void
     {
         $implements = class_implements(CallStack::class);

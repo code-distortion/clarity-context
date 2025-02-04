@@ -8,6 +8,7 @@ use CodeDistortion\ClarityContext\Support\CallStack\Frame;
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ContextMeta;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SomeOtherClass;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test that the MetaCallStack class prunes frames properly.
@@ -23,6 +24,7 @@ class MetaCallStackPruning2IntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_frame_pruning_when_calling_an_object_method(): void
     {
         $objects = [];
@@ -54,6 +56,7 @@ class MetaCallStackPruning2IntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_frame_pruning_when_calling_a_class_static_method(): void
     {
         for ($count = 0; $count <= 1; $count++) {
@@ -82,6 +85,7 @@ class MetaCallStackPruning2IntegrationTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_frame_pruning_when_calling_a_closure(): void
     {
         $callback = function (?string $context) {

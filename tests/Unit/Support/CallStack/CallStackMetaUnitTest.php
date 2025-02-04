@@ -12,6 +12,7 @@ use CodeDistortion\ClarityContext\Support\CallStack\MetaData\LastApplicationFram
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\Meta;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test that CallStack returns Meta objects properly.
@@ -27,6 +28,7 @@ class CallStackMetaUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_retrieval_of_meta_objects(): void
     {
         $callMeta1 = self::buildCallMeta();

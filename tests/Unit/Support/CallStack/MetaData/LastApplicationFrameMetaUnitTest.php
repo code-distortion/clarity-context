@@ -4,6 +4,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\Support\CallStack\MetaData;
 
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\LastApplicationFrameMeta;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the LastApplicationFrameMeta class.
@@ -19,6 +20,7 @@ class LastApplicationFrameMetaUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_last_application_frame_meta(): void
     {
         $rand = mt_rand();

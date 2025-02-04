@@ -21,6 +21,8 @@ use CodeDistortion\ClarityContext\Tests\TestSupport\LaravelConfigHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\PHPStackTraceHelper;
 use CodeDistortion\ClarityContext\Tests\TestSupport\SimulateControlPackage;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -37,6 +39,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_context_crud(): void
     {
         // CREATE a new Context object
@@ -175,6 +178,7 @@ class ContextUnitTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_retrieval_of_callstack_and_stack_trace(): void
     {
         $context = new Context(
@@ -220,6 +224,7 @@ class ContextUnitTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_context_fetching_methods_separately(): void
     {
         $fakeId = mt_rand();
@@ -281,6 +286,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_generation_of_callstack_and_stack_trace_based_on_an_exception(): void
     {
         $exception = new Exception();
@@ -364,6 +370,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_generation_of_callstack_and_stack_trace_based_on_a_php_stack_trace(): void
     {
         $phpStackTrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -440,6 +447,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_context_class_can_identify_the_caught_here_frame_when_based_on_an_exception(): void
     {
         $catcherObjectId = 1;
@@ -475,6 +483,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_the_context_class_wont_identify_the_caught_here_frame_when_based_on_stack_trace(): void
     {
         $catcherObjectId = 1;
@@ -513,6 +522,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_worth_reporting(): void
     {
         $buildContext = function (MetaCallStack $metaCallStack, ?int $catcherObjectId = null): Context {
@@ -561,6 +571,8 @@ class ContextUnitTest extends LaravelTestCase
      * @param boolean $enabled Whether Clarity is enabled or not.
      * @return void
      */
+    #[Test]
+    #[DataProvider('clarityEnabledDataProvider')]
     public static function test_that_meta_objects_arent_created_when_clarity_is_disabled(bool $enabled): void
     {
         $enabled
@@ -644,6 +656,7 @@ class ContextUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_when_an_invalid_meta_data_type_is_encountered(): void
     {
         $metaCallStack = new MetaCallStack();

@@ -5,6 +5,7 @@ namespace CodeDistortion\ClarityContext\Tests\Unit\Exceptions;
 use CodeDistortion\ClarityContext\Exceptions\ClarityContextInitialisationException;
 use CodeDistortion\ClarityContext\Exceptions\ClarityContextRuntimeException;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Exception classes.
@@ -20,6 +21,7 @@ class ExceptionUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_exception_messages(): void
     {
         // ClarityContextInitialisationException

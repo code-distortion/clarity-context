@@ -6,6 +6,7 @@ use CodeDistortion\ClarityContext\Clarity;
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ContextMeta;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Clarity class.
@@ -22,6 +23,7 @@ class ClarityIntegrationTest extends LaravelTestCase
      * @return void
      * @throws Exception Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_that_meta_data_is_remembered_when_calling_call_user_func_array()
     {
         call_user_func_array([new Clarity(), 'context'], ['something']);

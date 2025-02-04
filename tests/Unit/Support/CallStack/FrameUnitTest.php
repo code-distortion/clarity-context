@@ -7,6 +7,7 @@ use CodeDistortion\ClarityContext\Support\CallStack\MetaData\ContextMeta;
 use CodeDistortion\ClarityContext\Support\CallStack\MetaData\Meta;
 use CodeDistortion\ClarityContext\Support\Support;
 use CodeDistortion\ClarityContext\Tests\PHPUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use stdClass;
 
 /**
@@ -23,6 +24,7 @@ class FrameUnitTest extends PHPUnitTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_call_stack_frame(): void
     {
         $projectRootDir = (string) realpath(__DIR__ . '/../../../../');

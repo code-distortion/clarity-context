@@ -7,6 +7,7 @@ use CodeDistortion\ClarityContext\Settings;
 use CodeDistortion\ClarityContext\Support\Framework\Framework;
 use CodeDistortion\ClarityContext\Support\InternalSettings;
 use CodeDistortion\ClarityContext\Tests\LaravelTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Test the Laravel framework config integration.
@@ -22,6 +23,7 @@ class LaravelFrameworkConfigUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_framework_config_caching(): void
     {
         self::assertSame(Framework::config(), Framework::config());
@@ -37,6 +39,7 @@ class LaravelFrameworkConfigUnitTest extends LaravelTestCase
      * @return void
      * @throws ClarityContextInitialisationException Doesn't throw this, but phpcs expects this to be here.
      */
+    #[Test]
     public static function test_project_root_dir_detection(): void
     {
         self::assertSame(
@@ -54,6 +57,7 @@ class LaravelFrameworkConfigUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_framework_config_crud(): void
     {
         $config = Framework::config();
@@ -199,6 +203,7 @@ class LaravelFrameworkConfigUnitTest extends LaravelTestCase
      *
      * @return void
      */
+    #[Test]
     public static function test_framework_config_settings(): void
     {
         $config = Framework::config();
